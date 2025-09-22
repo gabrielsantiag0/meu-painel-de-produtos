@@ -43,7 +43,6 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    // Linhas novas
     const token = localStorage.getItem('accessToken');
     if (token) {
       try {
@@ -102,81 +101,84 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="container mt-5">
-      <div className="d-flex justify-content-between align-items-center mb-4">
-        <h2>Painel de Produtos</h2>
-        <div className="d-flex gap-2">
-          <input
-            type="text"
-            className="form-control form-control-sm"
-            placeholder="Buscar produto..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            style={{ width: '200px' }}
-          />
-              {userProfile === 'Administrador' && (
-                <button onClick={() => navigate('/admin-dashboard')} className="btn btn-dark btn-sm">
-                  Gerenciar Usuários
-                </button>
-              )}
-          <button onClick={() => navigate('/add-product')} className="btn btn-primary btn-sm">
-            Adicionar Produto
-          </button>
-          <button onClick={handleLogout} className="btn btn-danger btn-sm">
-            Logout
-          </button>
-        </div>
-      </div>
-
-      {produtos && Array.isArray(produtos) && produtos.length > 0 ? (
-        <div className="table-responsive">
-          <table className="table table-hover table-striped">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>Descrição</th>
-                <th>Preço</th>
-                <th>Quantidade</th>
-                <th>Ações</th>
-              </tr>
-            </thead>
-            <tbody>
-              {produtos.map(produto => (
-                <tr key={produto.id}>
-                  <td>{produto.id}</td>
-                  <td>{produto.nome}</td>
-                  <td>{produto.descricao}</td>
-                  <td>R$ {produto.preco?.toFixed(2) ?? 'N/A'}</td>
-                  <td>{produto.quantidade}</td>
-                  {/* Linha alterada */}
-                  <td>
-                    {userProfile === 'Supervisor' && (
-                      <>
-                        <button
-                          className="btn btn-warning btn-sm me-2"
-                          onClick={() => navigate(`/edit-product/${produto.id}`)}>
-                          Editar
+     <div className="container mt-5">
+            <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
+                <h2 className="mb-3 mb-md-0">Painel de Produtos</h2>
+                
+                {/* O div abaixo se torna uma coluna em telas pequenas */}
+                <div className="d-flex flex-column flex-md-row gap-2">
+                    <input
+                        type="text"
+                        className="form-control form-control-sm flex-grow-1"
+                        placeholder="Buscar produto..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                    />
+                    
+                    {userProfile === 'Administrador' && (
+                        <button onClick={() => navigate('/admin-dashboard')} className="btn btn-dark btn-sm">
+                            Gerenciar Usuários
                         </button>
-                        <button
-                          className="btn btn-danger btn-sm"
-                          onClick={() => handleDelete(produto.id)}>
-                          Excluir
-                        </button>
-                      </>
                     )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                    
+                    <button onClick={() => navigate('/add-product')} className="btn btn-primary btn-sm">
+                        Adicionar Produto
+                    </button>
+                    
+                    <button onClick={handleLogout} className="btn btn-danger btn-sm">
+                        LogOut
+                    </button>
+                </div>
+            </div>
+
+            {produtos && Array.isArray(produtos) && produtos.length > 0 ? (
+                <div className="table-responsive">
+                    <table className="table table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nome</th>
+                                <th>Descrição</th>
+                                <th>Preço</th>
+                                <th>Quantidade</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {produtos.map(produto => (
+                                <tr key={produto.id}>
+                                    <td>{produto.id}</td>
+                                    <td>{produto.nome}</td>
+                                    <td>{produto.descricao}</td>
+                                    <td>R$ {produto.preco?.toFixed(2) ?? 'N/A'}</td>
+                                    <td>{produto.quantidade}</td>
+                                    <td>
+                                        {userProfile === 'Supervisor' && (
+                                            <>
+                                                <button
+                                                    className="btn btn-warning btn-sm me-2"
+                                                    onClick={() => navigate(`/edit-product/${produto.id}`)}>
+                                                    Editar
+                                                </button>
+                                                <button
+                                                    className="btn btn-danger btn-sm"
+                                                    onClick={() => handleDelete(produto.id)}>
+                                                    Excluir
+                                                </button>
+                                            </>
+                                        )}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            ) : (
+                <div className="alert alert-info text-center mt-4">
+                    Nenhum produto encontrado.
+                </div>
+            )}
         </div>
-      ) : (
-        <div className="alert alert-info text-center mt-4">
-          Nenhum produto encontrado.
-        </div>
-      )}
-    </div>
   );
 };
 

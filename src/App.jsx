@@ -8,15 +8,16 @@ import PrivateRoute from './components/PrivateRoute';
 import AddProduct from './pages/AddProduct'; 
 import EditProduct from './pages/EditProduct';
 import AdminDashboard from './pages/AdminDashboard'; 
-
+import PublicProductList from './pages/PublicProductList'; 
 
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/produtos" element={<PublicProductList />} />
         <Route path="/" element={<Login />} />
-        <Route path="/register" element={<Register />} /> {/* Nova rota de registro */}
+        <Route path="/register" element={<Register />} /> 
         <Route
           path="/dashboard"
           element={
