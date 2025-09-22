@@ -109,6 +109,32 @@ const AdminDashboard = () => {
     return <div className="alert alert-danger mt-5 text-center">{error}</div>;
   }
 
+  // Deletar Usuario
+  const handleDeleteUser = async (userId) => {
+  if (window.confirm("Tem certeza de que deseja excluir este usuário? Esta ação é irreversível.")) {
+    try {
+      setMessage('');
+      const token = localStorage.getItem('accessToken');
+      if (!token) {
+        throw new Error('Token de acesso não encontrado.');
+      }
+
+      const response = await axios.delete(`http://localhost:5000/api/usuarios/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      setMessage(response.data.message);
+      fetchUsers(); // Atualiza a lista para remover o usuário excluído
+      
+    } catch (error) {
+      console.error('Erro ao deletar usuário:', error);
+      setMessage(error.response?.data?.message || 'Erro ao deletar o usuário.');
+    }
+  }
+};
+
   return (
     <div className="container mt-5">
       <div className="d-flex justify-content-between align-items-center mb-4">
@@ -183,10 +209,18 @@ const AdminDashboard = () => {
                           </button>
                         </>
                       )}
+                          <button
+                    className="btn btn-danger btn-sm ms-2"
+                    onClick={() => handleDeleteUser(user.id)}
+                  >
+                    Excluir Usuario 
+                  </button>
                     </div>
+                    
                   </td>
                 </tr>
               ))}
+              
             </tbody>
           </table>
         </div>
