@@ -50,7 +50,6 @@ const Dashboard = () => {
         setUserProfile(decoded.perfil);
       } catch (e) {
         console.error("Falha ao decodificar o token:", e);
-        // Em caso de erro, remove o token e força logout
         handleLogout();
       }
     }
@@ -105,7 +104,6 @@ const Dashboard = () => {
             <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
                 <h2 className="mb-3 mb-md-0">Painel de Produtos</h2>
                 
-                {/* O div abaixo se torna uma coluna em telas pequenas */}
                 <div className="d-flex flex-column flex-md-row gap-2">
                     <input
                         type="text"

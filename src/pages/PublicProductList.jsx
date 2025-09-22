@@ -46,7 +46,6 @@ const PublicProductList = () => {
   
   return (
     <>
-      {/* Hero Section */}
       <div className="bg-light text-dark p-5 rounded-3 mb-5">
         <div className="container-fluid py-5 text-center">
           <h1 className="display-5 fw-bold">Bem-vindo(a) ao Catálogo de Produtos!</h1>

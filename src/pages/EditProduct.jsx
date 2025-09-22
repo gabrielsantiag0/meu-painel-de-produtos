@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const EditProduct = () => {
-  const { id } = useParams(); // Pega o ID da URL
+  const { id } = useParams(); 
   const [nome, setNome] = useState('');
   const [descricao, setDescricao] = useState('');
   const [preco, setPreco] = useState('');

@@ -23,7 +23,6 @@ const Register = () => {
 
       setMessage(response.data.message);
       
-      // Redireciona para a página de login após 2 segundos
       setTimeout(() => {
         navigate('/');
       }, 2000);

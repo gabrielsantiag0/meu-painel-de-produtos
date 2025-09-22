@@ -5,14 +5,14 @@ import { useNavigate, Link } from 'react-router-dom';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
-  const [message, setMessage] = useState(null); // Usamos um único estado para a mensagem
-  const [isSuccess, setIsSuccess] = useState(false); // E um estado para saber se é sucesso ou erro
+  const [message, setMessage] = useState(null); 
+  const [isSuccess, setIsSuccess] = useState(false); 
   
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setMessage(null); // Limpa a mensagem anterior
+    setMessage(null); 
     setIsSuccess(false);
 
     try {
@@ -44,7 +44,6 @@ const Login = () => {
           <div className="card shadow p-4">
             <h2 className="card-title text-center text-primary mb-4">Acesso ao Sistema</h2>
             <form onSubmit={handleSubmit}>
-              {/* Alerta para exibir a mensagem */}
               {message && (
                 <div 
                   className={`alert ${isSuccess ? 'alert-success' : 'alert-danger'} text-center`}

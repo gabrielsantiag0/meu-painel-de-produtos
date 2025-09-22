@@ -8,7 +8,7 @@ const AdminDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [message, setMessage] = useState('');
-  const [pendingChanges, setPendingChanges] = useState({}); // Novo estado para mudanças pendentes
+  const [pendingChanges, setPendingChanges] = useState({}); 
   const navigate = useNavigate();
   
   const perfisDisponiveis = ['Administrador', 'Supervisor', 'Analista'];
@@ -45,7 +45,6 @@ const AdminDashboard = () => {
     fetchUsers();
   }, []);
 
-  // Lida com a mudança no dropdown, mas não chama a API
   const handlePerfilChange = (userId, novoPerfil) => {
     setPendingChanges(prevChanges => ({
       ...prevChanges,
@@ -71,7 +70,6 @@ const AdminDashboard = () => {
       );
 
       setMessage(response.data.message);
-      // Remove a alteração pendente do estado após o sucesso
       setPendingChanges(prevChanges => {
         const newChanges = { ...prevChanges };
         delete newChanges[userId];
@@ -176,7 +174,6 @@ const AdminDashboard = () => {
                       (pendingChanges[user.id] || user.perfil) === 'Supervisor' ? 'bg-info' : 
                       'bg-secondary'
                     }`}>
-                      {/* Exibe a alteração pendente ou o perfil original */}
                       {pendingChanges[user.id] ? `${user.perfil} -> ${pendingChanges[user.id]}` : user.perfil}
                     </span>
                   </td>
@@ -184,7 +181,7 @@ const AdminDashboard = () => {
                     <div className="d-flex align-items-center">
                       <select
                         className="form-select form-select-sm me-2"
-                        value={pendingChanges[user.id] || user.perfil} // Usa o valor pendente se existir
+                        value={pendingChanges[user.id] || user.perfil} 
                         onChange={(e) => handlePerfilChange(user.id, e.target.value)}
                       >
                         {perfisDisponiveis.map(perfil => (
@@ -192,7 +189,6 @@ const AdminDashboard = () => {
                         ))}
                       </select>
                       
-                      {/* Botões de confirmação/cancelamento aparecem se houver uma mudança pendente */}
                       {pendingChanges[user.id] && (
                         <>
                           <button

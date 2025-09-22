@@ -25,8 +25,8 @@ const AddProduct = () => {
       const newProduct = {
         nome,
         descricao,
-        preco: parseFloat(preco), // Converte o preço para número
-        quantidade: parseInt(quantidade) // Converte a quantidade para número inteiro
+        preco: parseFloat(preco), 
+        quantidade: parseInt(quantidade) 
       };
 
       const response = await axios.post('http://localhost:5000/api/produtos', newProduct, {
